@@ -12,7 +12,7 @@ builder.Services.AddDbContext<FootballContext>(options =>
 
 builder.Services.AddScoped<ILeagueRepository, LeagueRepository>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
-
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 
 var app = builder.Build();
 

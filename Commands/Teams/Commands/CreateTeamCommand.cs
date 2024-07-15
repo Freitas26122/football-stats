@@ -7,6 +7,7 @@ public class CreateTeamCommand : ICommand
     public event EventHandler? CanExecuteChanged;
     public string Name { get; set; }
     public string LeagueId { get; set; }
+    public string? City { get; set; }
 
     public bool CanExecute(object? parameter)
     {
@@ -21,6 +22,7 @@ public class CreateTeamCommand : ICommand
             TeamId = Guid.NewGuid().ToString().Substring(0, 8),
             LeagueId = LeagueId,
             Name = Name,
+            City = City
         };
 
         try

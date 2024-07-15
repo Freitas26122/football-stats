@@ -68,6 +68,7 @@ namespace FootballStatsAPI.Repositories
 
             existingTeam.Name = team.Name;
             existingTeam.LeagueId = team.LeagueId;
+            existingTeam.City = team.City;
 
             await _context.SaveChangesAsync();
         }

@@ -80,3 +80,4 @@ C:\Users\GuilhermedeFreitasRy\projeto-adventech\FootballStatsAPI\bin\Debug\net6.
 C:\Users\GuilhermedeFreitasRy\projeto-adventech\FootballStatsAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\GuilhermedeFreitasRy\projeto-adventech\FootballStatsAPI\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\GuilhermedeFreitasRy\projeto-adventech\FootballStatsAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\GuilhermedeFreitasRy\projeto-adventech\FootballStatsAPI\bin\Debug\net6.0\Dapper.dll

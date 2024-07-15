@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "qIWnQybemr/iaKbWkpzv63bljK1LvuXkL3RnO2E2w/Q+EJ/27e5K1JpUWOUBhB57kY7OLHy1q0qdn17LgsjTrA==",
+  "dgSpecHash": "v8z+DHwZYX2HptUTTMXm4x3d0pggnOEA0eYFk6XWmqs5V+QL/A7jCEN8FYGQXUYVOF9Ad+AnoJ+s51Gs5ycTCg==",
   "success": true,
   "projectFilePath": "C:\\Users\\GuilhermedeFreitasRy\\projeto-adventech\\FootballStatsAPI\\FootballStatsAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GuilhermedeFreitasRy\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\GuilhermedeFreitasRy\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\GuilhermedeFreitasRy\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\GuilhermedeFreitasRy\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\GuilhermedeFreitasRy\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\GuilhermedeFreitasRy\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

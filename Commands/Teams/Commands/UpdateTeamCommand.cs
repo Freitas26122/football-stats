@@ -7,6 +7,7 @@ public class UpdateTeamCommand : ICommand
     public event EventHandler? CanExecuteChanged;
     public string Name { get; set; }
     public string LeagueId { get; set; }
+    public string? City { get; set; }
 
     public bool CanExecute(object? parameter)
     {
@@ -18,7 +19,7 @@ public class UpdateTeamCommand : ICommand
         if (teamRepository == null)
             throw new InvalidOperationException("Repositório do time não está inicializado.");
 
-        var team = new Teams { TeamId = teamId, Name = Name, LeagueId = LeagueId };
+        var team = new Teams { TeamId = teamId, Name = Name, LeagueId = LeagueId, City = City };
 
         try
         {

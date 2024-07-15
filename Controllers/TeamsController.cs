@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FootballStatsAPI.Repositories;
 using FootballStatsAPI.Models;
+using FootballStatsAPI.Queries;
 
 namespace FootballStatsAPI.Controllers
 {
@@ -9,10 +10,12 @@ namespace FootballStatsAPI.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly FootballContext _context;
 
-        public TeamsController(ITeamRepository teamRepository)
+        public TeamsController(ITeamRepository teamRepository, FootballContext context)
         {
             _teamRepository = teamRepository;
+            _context = context;
         }
 
         [HttpPost]
@@ -41,13 +44,29 @@ namespace FootballStatsAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet("{teamId}")]
-        public async Task<ActionResult<Teams>> GetTeamById(string teamId)
+        [HttpGet("GetTeamById/{teamId}")]
+        public async Task<IActionResult> GetTeamById(string teamId)
         {
-            var team = await _teamRepository.GetTeamByIdAsync(teamId);
-            if (team == null) return NotFound();
+            var query = new GetTeamByIdQuery(_context) { TeamId = teamId };
+            var teams = await query.ExecuteAsync();
 
-            return team;
+            if (teams == null || teams.Count == 0)
+                return NotFound("Nenhum time encontrado.");
+
+            return Ok(teams);
         }
+
+        [HttpGet("GetTeamsByLeagueId/{leagueId}")]
+        public async Task<IActionResult> GetTeamsByLeagueId(string leagueId)
+        {
+            var query = new GetTeamsQuery(_context) { LeagueId = leagueId };
+            var teams = await query.ExecuteAsync();
+
+            if (teams == null || teams.Count == 0)
+                return NotFound("Nenhum time encontrado.");
+
+            return Ok(teams);
+        }
+
     }
 }
