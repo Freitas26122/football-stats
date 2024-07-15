@@ -18,21 +18,22 @@ namespace FootballStatsAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateLeague([FromBody] CreateLeagueCommand command)
         {
-            if (command == null)
-                return BadRequest("Comando não pode ser nulo.");
+            if (command == null) return BadRequest("Comando não pode ser nulo.");
+            var result = await command.ExecuteAsync(_leagueRepository);
 
-            var league = new Leagues
-            {
-                LeagueId = command.LeagueId,
-                Name = command.Name,
-                Country = command.Country
-            };
-
-            await _leagueRepository.AddLeagueAsync(league);
-
-            return CreatedAtAction(nameof(CreateLeague), new { id = league.LeagueId }, league);
+            if (!result.IsSuccess) return BadRequest(result.ErrorMessage);
+            return CreatedAtAction(nameof(CreateLeague), command);
         }
 
+        [HttpPut("{leagueId}")]
+        public async Task<IActionResult> UpdateLeague(string leagueId, [FromBody] UpdateLeagueCommand command)
+        {
+            if (command == null) return BadRequest("Comando não pode ser nulo.");
+            var result = await command.ExecuteAsync(leagueId, _leagueRepository);
+
+            if (!result.IsSuccess) return result.IsNotFound ? NotFound() : BadRequest(result.ErrorMessage);
+            return CreatedAtAction(nameof(CreateLeague), command);
+        }
 
         [HttpGet("{leagueId}")]
         public async Task<ActionResult<Leagues>> GetLeagueById(string leagueId)

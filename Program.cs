@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using FootballStatsAPI.Repositories; 
+using FootballStatsAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +11,8 @@ builder.Services.AddDbContext<FootballContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ILeagueRepository, LeagueRepository>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+
 
 var app = builder.Build();
 

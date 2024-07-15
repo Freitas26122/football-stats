@@ -2,8 +2,9 @@ using System.Windows.Input;
 using FootballStatsAPI.Models;
 using FootballStatsAPI.Repositories;
 
-public class CreateLeagueCommand : ICommand
+public class UpdateLeagueCommand : ICommand
 {
+
     public event EventHandler? CanExecuteChanged;
     public string Name { get; set; }
     public string Country { get; set; }
@@ -13,20 +14,17 @@ public class CreateLeagueCommand : ICommand
         return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Country);
     }
 
-    public async Task<CommandResult> ExecuteAsync(ILeagueRepository? leagueRepository)
+    public async Task<CommandResult> ExecuteAsync(string leagueId, ILeagueRepository? leagueRepository)
     {
         if (leagueRepository == null) throw new InvalidOperationException("LeagueRepository is not initialized.");
-
-        var league = new Leagues
-        {
-            LeagueId = Guid.NewGuid().ToString().Substring(0, 8),
-            Name = Name,
-            Country = Country
-        };
+        var league = new Leagues { LeagueId = leagueId, Name = Name, Country = Country };
 
         try
         {
-            await leagueRepository.AddLeagueAsync(league);
+            var existingLeague = await leagueRepository.GetLeagueByIdAsync(leagueId);
+            if (existingLeague == null) return CommandResult.NotFound();
+
+            await leagueRepository.UpdateLeagueAsync(league);
             RaiseCanExecuteChanged();
             return CommandResult.Success();
         }
@@ -42,8 +40,11 @@ public class CreateLeagueCommand : ICommand
 
     public async void Execute(object? parameter)
     {
+        if (parameter is not (string leagueId and not null))
+            throw new ArgumentException("O parâmetro deve ser uma string representando o ID do time.");
+
         var leagueRepository = parameter as ILeagueRepository;
-        await ExecuteAsync(leagueRepository);
+        await ExecuteAsync(leagueId, leagueRepository);
     }
 
     public void RaiseCanExecuteChanged()

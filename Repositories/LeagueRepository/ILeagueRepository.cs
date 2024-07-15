@@ -6,5 +6,6 @@ namespace FootballStatsAPI.Repositories
     {
         Task AddLeagueAsync(Leagues league);
         Task<Leagues> GetLeagueByIdAsync(string leagueId);
+        Task UpdateLeagueAsync(Leagues league);
     }
 }
